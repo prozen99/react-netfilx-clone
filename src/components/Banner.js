@@ -29,6 +29,12 @@ export default function Banner() {
         });
         setMovie(movieDetail);//상태를 변환시켜줌.
     }
+    const truncate =(str,n)=>{
+        return str.length >n ? str.substr(0,n-1)+"...":str;
+        //문자열 길이가 100보다 크면 길이가 99까지인걸로 자르고,
+        // 아니면 그냥 문자열 보이게해줌.
+    }
+
 // UI 생성하는 부분
   return (
     <header
@@ -55,6 +61,7 @@ export default function Banner() {
       </div>
 
       <h1 className="banner__description">
+        {truncate(movie.overview,100)} 
         
       </h1>
     </div>
