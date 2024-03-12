@@ -1,9 +1,13 @@
 import Nav from '../src/components/Nav';
 import './App.css';
+import Banner from './components/Banner';
 
 function App() {
   return (
-    <Nav />
+    <div className='App'>
+    <Nav /> 
+    <Banner /> {}
+    </div>
   );
 }
 
