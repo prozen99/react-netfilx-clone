@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const instance=axios.create({
-    baseURL:"http://api.themoviedb.org/3",
+    baseURL:"http://api.themoviedb.org/3", // URL 뒤에다가 ? api_key가 붙고 = ~~~~~&
     params:{
         api_key:"b18e798ff377ef49f1c335283e7c43d6",
         language:"ko-KR",
