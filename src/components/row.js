@@ -8,6 +8,7 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
     const[modalOpen,setModalOpen]=useState(false);//초기 상태를 false로 지정해주고 
     // 만약 영화 포스터를 클릭하게 된다면 그때 상태를 바꿔줘서 이벤트 처리를 하게 해주는 부분임.
     
+    const [movieSelected,setMovieSelected]=useState({});
     useEffect(()=>{
         console.log('fetchurl',fetchUrl);
         console.log('title',title);
@@ -26,7 +27,8 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
     }
 
     const handleClick=(movie)=>{
-        setModalOpen(true); // 함수가 call 되면 true
+        setModalOpen(true)
+        setMovieSelected(movie)// 영화 정보를 받아줌.
     };
   return (
     <section className='row'>
@@ -68,7 +70,10 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
 
                {
                 modalOpen&&(
-                    <MovieModal/>
+                    <MovieModal {...movieSelected}
+                    setModalOpen={setModalOpen}
+                    
+                    />
                 )
                }
     </section>
