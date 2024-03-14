@@ -5,6 +5,8 @@ import "./Row.css";
 export default function Row({title,id,fetchUrl,isLargeRow}) {
     const [movies,setMovies]=useState([]); // 상태 변화를 이용해서 사용함
     //useEffect 는 주로 필요한 정보를 가져올 때 사용함
+    const[modalOpen,setModalOpen]=useState(false);//초기 상태를 false로 지정해주고 
+    // 만약 영화 포스터를 클릭하게 된다면 그때 상태를 바꿔줘서 이벤트 처리를 하게 해주는 부분임.
     
     useEffect(()=>{
         console.log('fetchurl',fetchUrl);
@@ -22,6 +24,10 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
 
 
     }
+
+    const handleClick=(movie)=>{
+        setModalOpen(true); // 함수가 call 되면 true
+    };
   return (
     <section className='row'>
         <h2>{title}</h2>
@@ -41,6 +47,7 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
                      className={`row__poster ${isLargeRow && "row__posterLarge"}`}
                      src={`https://image.tmdb.org/t/p/original/${isLargeRow ? movie.poster_path: movie.backdrop_path}`}   
                      alt={movie.name}
+                     onClick={()=>handleClick(movie)}  
 
                     />
 
@@ -59,6 +66,11 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
 
         </div>
 
+               {
+                modalOpen&&(
+                    <MovieModal/>
+                )
+               }
     </section>
     
   );
