@@ -10,6 +10,7 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
         console.log('fetchurl',fetchUrl);
         console.log('title',title);
         fetchMovieData();
+        
     },[]); // 값이 빈배열이라는 것은 일단 1번 실행하고 종료한다
     // 만약 배열의 값이 name일 경우에는 그 값이 변경될 때마다 
     //useEffect 함수가 호출되게 된다.
@@ -26,7 +27,12 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
         <h2>{title}</h2>
         <div className="slider">
             <div className='slider__arrow-left'>
-                <span className="arrow">{"<"}</span>
+                <span className="arrow" 
+                onClick={()=>{
+                    
+                    document.getElementById(id).scrollLeft -= window.innerWidth -80;
+                }}>
+                    {"<"}</span>
             </div>
             <div id={id} className="row__posters">
                 {movies.map(movie=>(
@@ -43,7 +49,11 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
                 ))}
             </div>
             <div className='slider__arrow-right'>
-                <span className='arrow'>{">"}</span>
+                <span className='arrow'
+                onClick={()=>{
+                   document.getElementById(id).scrollLeft += window.innerWidth -80;
+                }}
+                >{">"}</span>
 
             </div>
 
