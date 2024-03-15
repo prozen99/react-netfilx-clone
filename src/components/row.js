@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import axios from '../api/axios';
 import "./Row.css";
+import MovieModal from './MovieModal';
 
 export default function Row({title,id,fetchUrl,isLargeRow}) {
     const [movies,setMovies]=useState([]); // 상태 변화를 이용해서 사용함
