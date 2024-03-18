@@ -14,3 +14,4 @@ const requests={
 
 export default requests; //이렇게 내보내주면 이 파일뿐만아니라
 // 다른 파일에서도 사용할 수 있게 해줌.
+//import는 실제 사용 하는곳에서 가져오기.
