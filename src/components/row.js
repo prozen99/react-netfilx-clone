@@ -3,6 +3,15 @@ import axios from '../api/axios';
 import "./Row.css";
 import MovieModal from './MovieModal';
 
+import {Navigation,Pagination,Scrollbar,A11y} from 'swiper';
+import {Swiper,SwiperSlide} from 'swiper/react';
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
+
 export default function Row({title,id,fetchUrl,isLargeRow}) {
     const [movies,setMovies]=useState([]); // 상태 변화를 이용해서 사용함
     //useEffect 는 주로 필요한 정보를 가져올 때 사용함
@@ -34,17 +43,43 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
   return (
     <section className='row'>
         <h2>{title}</h2>
-        <div className="slider">
-            <div className='slider__arrow-left'>
-                <span className="arrow" 
-                onClick={()=>{
-                    
-                    document.getElementById(id).scrollLeft -= window.innerWidth -80;
-                }}>
-                    {"<"}</span>
-            </div>
+        <Swiper 
+        // install Swiper modules
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        loop={true} // loop 기능을 사용할 것인지
+        breakpoints={{
+            1378:{ // 화면 px의 값.
+                slidesPerview:6, // 한번에 보이는 슬라이드 개수
+                slidesPerGroup:6, // 그룹으로 묶을 개수가 몇개인지
+                
+            
+            // 코드해석 : view 가 1378 px 일때 , 영화 이미지가 6개씩 한그룹으로 
+            // 정해져있고 다음 화살표를 누르게 되면 또 6개가 한그룹으로 보이게 됨.
+                
+            },
+            998:{
+                slidesPerView:5,
+                slidesPerGroup:5,
+            },
+            625: {
+                slidesPerView:4,
+                slidesPerGroup:4,
+            },
+            0:{
+                slidesPerView:3,
+                slidesPerGroup:3,
+            }
+
+           
+        }}
+          
+      >
+
+      
+        
             <div id={id} className="row__posters">
                 {movies.map(movie=>(
+                    <SwiperSlide>
                     <img
                      key={movie.id}
                      className={`row__poster ${isLargeRow && "row__posterLarge"}`}
@@ -53,21 +88,16 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
                      onClick={()=>handleClick(movie)}  
 
                     />
+                    </SwiperSlide>
 
 
                     
                 ))}
             </div>
-            <div className='slider__arrow-right'>
-                <span className='arrow'
-                onClick={()=>{
-                   document.getElementById(id).scrollLeft += window.innerWidth -80;
-                }}
-                >{">"}</span>
+           
+           </Swiper>
 
-            </div>
-
-        </div>
+        
 
                {
                 modalOpen&&(

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import "./movieModal.css";
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 export default function MovieModal(
     {
         backdrop_path,
         title,
-        overview,
+        overview,//구조 분해 할당.
         name,
         release_date,
         first_air_date,
@@ -12,11 +13,13 @@ export default function MovieModal(
         setModalOpen
     }
 ) {
+    const ref=useRef();
+    useOnClickOutside(ref,()=>{setModalOpen(false)}) // modalOpen false 값을줘서 닫을 수 있게해준다.
     
   return (
     <div className='presentation'>
-        <div className='wrapper-mdoal'>
-        <div className='modal'>
+        <div className='wrapper-modal'>
+        <div className='modal' ref={ref}>
             <span onClick={()=>{setModalOpen(false)}} className='modal-close'>
                 X
             </span>
